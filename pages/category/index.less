@@ -1,0 +1,61 @@
+page{
+    height: 100%;
+}
+.cates{
+    height: 100%;
+    .cates_container{
+        height: ~'calc( 100vh - 90rpx )';
+        /* less中使用calc时要注意  使用~和''*/
+        display: flex;
+        .left_numu{
+            // 子项 高度100% flex
+           flex: 2; 
+           .menu_item{
+               height: 80rpx;
+               display: flex;
+               justify-self: center;
+               align-items: center;
+               font-size: 30rpx;
+           }
+           .active{
+               color: var(--themeColor);
+               border-left: 5rpx solid currentColor;
+           }
+        }
+        .right_content{
+            // 子项 高度100% flex
+            flex: 5;
+            .goods_group{
+                .goods_title{
+                    height: 80rpx;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .delimiter{   
+                        color: rgba(22, 14, 94, 0.63);
+                        padding: 0 10rpx;
+                    }
+                    .title{}
+                }
+                .goods_list{
+                    display: flex;
+                    flex-wrap: wrap;
+                    navigator{
+                        width: 33.33%;
+                        text-align: center;
+                        image{
+                            width: 33.33%;
+                            
+                            .goods_name{
+                                font-size: small;
+                            }
+                        }
+
+                    }
+                }
+
+            }
+    
+        }
+    }
+}
