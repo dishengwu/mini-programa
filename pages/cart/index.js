@@ -87,21 +87,37 @@ Page({
     const cart=wx.getStorageSync("cart")||[];
     this.setCart(cart);
   },
-  // 商品的选中
-  handleItemChange(e){
-    // 1 获取被修改的商品的id
-    console.log(e);
-    const goods_id=e.currentTarget.dataset.id;
-    console.log(goods_id);
-    // 2 获取购物车数组
-    let {cart} =this.data;
-    // 3 找到被修改的商品对象
-    let index=cart.findIndex(v=>v.goods_price);
-    // 4 选中状态取反
-    cart[index].checked =!cart[index].checked;
-  
-   this.setCart(cart);
-  },
+    // 商品的选中
+    handleItemChange(e) {
+        // 1 获取被修改的商品的id
+        console.log(e);
+        const goods_id = e.currentTarget.dataset.id;
+        console.log(goods_id);
+        // 2 获取购物车数组
+        let { cart } = this.data;
+        // 3 找到被修改的商品对象
+        // let index = cart.findIndex(v => v.goods_price);
+        let index = cart.findIndex((item) => item.goods_id === goods_id);
+        // 4 选中状态取反
+        cart[index].checked = !cart[index].checked;
+        //将数组重新写回data中
+        this.setData({
+            cart
+        });
+        this.setCart(cart);
+    },
+    //全选按钮
+    handleItemAllChange(e) {
+        //获得购物车数组 和全选变量
+        let { cart, allchecked } = this.data;
+        allchecked = !allchecked;
+        cart.forEach((item) => { item.checked = allchecked });
+        this.setData({
+            allchecked
+        });
+        //重新计算商品数量和总价格
+        this.setCart(cart);
+    },
  // 设置购物车状态 重新计算 底部工具栏的数据 全选 总价格 购买的数量
  setCart(cart){ 
    // 总价格 总数量
